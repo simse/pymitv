@@ -30,16 +30,16 @@ To send a keystroke use the following request:
 `http://TV_IP:6095/controller?action=keyevent&keycode=KEYCODE`
 
 Instead of `KEYCODE`, you should write an actual keycode. These are the available ones:
-Key/button | keycode | action
---- | --- | ---
-On/off toggle | `power` | Turns the TV on or off
-Up | `up` | Goes up
-Down | `down` | Goes down
-Left | `left` | Goes left
-Right | `right` | Goes right
-Enter | `enter` | Affirms selection
-Home | `home` | Returns to home screen
-Back | `back` | Goes one step back
-Menu | `menu` | Opens options menu
-Volume up | `volumeup` | Increases volume by 1
-Volume down | `volumedown` | Decreases volume by 1
+| Key/button | keycode | action |
+| --- | --- | --- |
+| On/off toggle | `power` | Turns the TV on or off |
+| Up | `up` | Goes up |
+| Down | `down` | Goes down |
+| Left | `left` | Goes left |
+| Right | `right` | Goes right |
+| Enter | `enter` | Affirms selection |
+| Home | `home` | Returns to home screen |
+| Back | `back` | Goes one step back |
+| Menu | `menu` | Opens options menu |
+| Volume up | `volumeup` | Increases volume by 1 |
+| Volume down | `volumedown` | Decreases volume by 1 |
