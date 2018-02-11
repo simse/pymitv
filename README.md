@@ -9,11 +9,11 @@ The package includes two modules: `Discover` and `Control`. Each have their role
 This method is used to scan the local network for TVs.
 
 **Arguments**
-| Name              | Required | Default value | Purpose                                                                                                                                  |
-|-------------------|----------|---------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| `stop_on_first`   | No       | `True`        | Whether or not the method should continue scanning for TVs after finding its first one. Only needed for people with multiple Xiaomi TVs. |
-| `base_ip`         | No       | `0`           | Instead of looking for the base IP, you can give it to the function in the format of `192.168.0.`                                        |
-| `speedy_gonzalez` | No       | `False`         | Speeds up the scan drastically at the risk of missing a TV.                                                                              |
+| Name | Required | Default value | Purpose |
+| --- | --- | --- | --- |
+| `stop_on_first` | No | `True` | Whether or not the method should continue scanning for TVs after finding its first one. Only needed for people with multiple Xiaomi TVs. |
+| `base_ip` | No | `0` | Instead of looking for the base IP, you can give it to the function in the format of `192.168.0.` |
+| `speedy_gonzalez` | No | `False` | Speeds up the scan drastically at the risk of missing a TV. |
 
 **Example usage**
 ```python
