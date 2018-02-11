@@ -15,10 +15,6 @@ This method is used to scan the local network for TVs.
 | `base_ip` | No | `0` | Instead of looking for the base IP, you can give it to the function in the format of `192.168.0.` |
 | `speedy_gonzalez` | No | `False` | Speeds up the scan drastically at the risk of missing a TV. |
 
-| Test | Test 2 |
-| --- | --- |
-| TEst | nire testug |
-
 **Example usage**
 ```python
 import Discover from pymitv
