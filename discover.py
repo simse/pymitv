@@ -33,7 +33,7 @@ class Discover:
                 if(stop_on_first):
                     break
 
-        return selv.tvs
+        return self.tvs
 
     def checkIp(self, ip, fast = False):
         print('Checking ip: {}...'.format(ip))
