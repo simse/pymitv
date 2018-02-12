@@ -1,14 +1,39 @@
 # pymitv
-A Python based control of the Mi Tv 3
+A Python 3 based control of the Mi Tv 3(s)
 
-## Using the Python package
-The package includes two modules: `Discover` and `Control`. Each have their role, as implied by their names.
+![The Mi TV 3s 65-inch](https://9to5google.files.wordpress.com/2016/03/xiaomi-mi-tv-3s.jpg?quality=82&w=1600&h=1000)
+
+## Introduction
+This package was developed to interface with the Xiaomi TV 3 series through their local HTTP API using Python. The package has both the ability to discover TVs and control them. The TV lineup in question is this [one.](http://www.mi.com/en/mitv3s/65/) It should be noted, that all the TV logic and hardware is in the soundbar. Thus, if you have a soundbar that looks identical to the one in the picture, you should be golden with this library.
+
+##### Supported models
+- Mi TV 3s (all sizes)
+
+##### Not sure if supported models
+- Mi TV 4A (all sizes)
+
+## Installing
+Easy as pie! Just use `pip`.
+
+**Most systems**
+```
+pip install pymitv
+```
+
+**Or if you have multiple Python versions**
+```
+python3 -m pip install pymitv
+```
+
+## Usage
+The package includes three modules: `Discover`, `Control` and `TV`. Each have their role, as implied by their names.
 
 ### Discovering TVs
 #### `Discover.scan()`
 This method is used to scan the local network for TVs.
 
 **Arguments**
+
 | Name | Required | Default value | Purpose |
 | --- | --- | --- | --- |
 | `stop_on_first` | No | `True` | Whether or not the method should continue scanning for TVs after finding its first one. Only needed for people with multiple Xiaomi TVs. |
@@ -16,6 +41,7 @@ This method is used to scan the local network for TVs.
 | `speedy_gonzalez` | No | `False` | Speeds up the scan drastically at the risk of missing a TV. |
 
 **Example usage**
+
 ```python
 import Discover from pymitv
 
@@ -61,10 +87,10 @@ This is where the `Control` class comes in handy. The class has a bunch of prede
 - `volume_down`
 
 #### `Control.sendKeystrokes(ip, keystrokes)`
-
 Sends a set of keystrokes to a TV at `ip`
 
 **Arguments**
+
 | Name              | Required | Default value | Purpose                                                     |
 |-------------------|----------|---------------|-------------------------------------------------------------|
 | `ip`              | Yes      | None          | The IP of the TV to send keystroke(s) to.                   |
@@ -75,12 +101,29 @@ Sends a set of keystrokes to a TV at `ip`
 Using this keyword in a sequence of keystrokes will make the method sleep for 0.4 seconds which is the effective time it takes for the TV to listen to new keystrokes.
 
 **Example usage**
+
 ```python
 import Control from pymitv
 
 Control().sendKeystrokes(Control.sleep)
 ```
 
+### TV as a class
+There is a class representation of the TV which will take an IP address. It has a range of control functions, and will keep track of on/off state (provided the script running is kept alive).
+
+**Example usage**
+
+```python
+from pymitv import TV
+
+tv = TV('192.168.0.41')
+
+tv.is_on() #Return False
+tv.wake() #Will wake the TV
+tv.up() #Will press key up
+```
+
+All keystrokes from the `Control` class are available with the exception of `turn_on`. This is because, you can't actually turn on the TV if it's completely off. Instead, use `wake` and `sleep`.
 
 ## Accessing the local API exposed by the TV
 This can be useful if you don't wish to use the Python package (this one), but you'd rather implement your own version. Below you'll find everything you need.
@@ -109,13 +152,14 @@ The above will return something along the lines of:
 }
 ```
 
-**BEWARE! If the TV is in standby mode, this request will still return as if it were on. Currently there is no way to check if TV is actually on.**
+**BEWARE! If the TV is in standby mode, this request will still return as if it were on. Currently there is no way to check if the TV is actually on.**
 
 #### Send keystroke
 To send a keystroke use the following request:
 `http://TV_IP:6095/controller?action=keyevent&keycode=KEYCODE`
 
 Instead of `KEYCODE`, you should write an actual keycode. These are the available ones:
+
 | Key/button | keycode | action |
 | --- | --- | --- |
 | On/off toggle | `power` | Turns the TV on or off |

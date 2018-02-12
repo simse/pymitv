@@ -1,14 +1,14 @@
 import requests
 import socket
-import multiprocessing
+#import multiprocessing
 
 class Discover:
-    tvs = []
-
-    def __init__(self):
-        self.tvs = []
+    def __init(self):
+        pass
 
     def scan(self, stop_on_first=True, base_ip=0, speedy_gonzalez=False):
+        tvs = []
+
         #Check if base_ip has been passed
         if(base_ip == 0):
             #Find IP address of computer pymitv is running on
@@ -28,15 +28,16 @@ class Discover:
             ip_check = '{}.{}'.format(base_ip, ip_suffix)
 
             if(self.checkIp(ip_check, speedy_gonzalez)):
-                self.tvs.append(ip_check)
+                tvs.append(ip_check)
 
                 if(stop_on_first):
                     break
 
-        return self.tvs
+        return tvs
 
-    def checkIp(self, ip, fast = False):
-        print('Checking ip: {}...'.format(ip))
+    def checkIp(self, ip, fast = False, log = False):
+        if(log):
+            print('Checking ip: {}...'.format(ip))
 
         #speeds up the check drastically, but comprosises accuracy on slow networks
         if(fast):
