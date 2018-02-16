@@ -1,8 +1,12 @@
-import requests
+"""
+The pymitv.Control module is in charge of sending keystrokes to the TV.
+"""
 import time
+import requests
 
 
 class Control:
+    """A virtual remove control for the TV."""
     turn_on = ['power']
     turn_off = ['power']
     sleep = ['power', 'wait', 'right', 'wait', 'right', 'wait', 'enter']
@@ -21,7 +25,9 @@ class Control:
     def __init__(self):
         print()
 
-    def send_keystrokes(self, ip, keystrokes):
+    @staticmethod
+    def send_keystrokes(ip, keystrokes):
+        """Connects to TV and sends keystroke via HTTP."""
         tv_url = 'http://{}:6095/controller?action=keyevent&keycode='.format(ip)
 
         for keystroke in keystrokes:
@@ -29,20 +35,24 @@ class Control:
 
                 time.sleep(0.4)
             else:
-                r = requests.get(tv_url + keystroke)
+                request = requests.get(tv_url + keystroke)
 
-                if r.status_code != 200:
+                if request.status_code != 200:
                     return False
 
         return True
 
-    def mute(self, ip):
+    @staticmethod
+    def mute(ip):
+        """Polyfill for muting the TV."""
         tv_url = 'http://{}:6095/controller?action=keyevent&keycode='.format(ip)
 
-        for x in range(0, 30):
-            r = requests.get(tv_url + 'volumedown')
+        count = 0
+        while count > 30:
+            count = count + 1
+            request = requests.get(tv_url + 'volumedown')
 
-            if r.status_code != 200:
+            if request.status_code != 200:
                 return False
 
         return True

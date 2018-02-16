@@ -1,87 +1,89 @@
+"""Contains the class for interfacing with the TV."""
 from pymitv import Control
 
+
 class TV:
-
+    """A virtual representation of the TV that stores state, and takes controls."""
     ip = None
-    state = False;
+    state = False
 
-    def __init__(self, ip = None):
-        #Check if an IP address has been supplied to the constructor
-        if(ip == None):
+    def __init__(self, ip=None):
+        # Check if an IP address has been supplied to the constructor
+        if ip is None:
             print('No TV supplied, hence it won\'t work')
 
-        #Make IP address global regardless of value
+        # Make IP address global regardless of value
         self.ip = ip
 
     def _send_keystroke(self, keystroke):
-        #Check if an IP address has been supplied, if it hasn't return false.
-        if(self.ip == None):
+        # Check if an IP address has been supplied, if it hasn't return false.
+        if self.ip is None:
             return False
 
-        #Make sure the TV is not already on, and then send keystroke
-        if(not self.state):
+        # Make sure the TV is not already on, and then send keystroke
+        if not self.state:
             return Control().send_keystrokes(self.ip, keystroke)
 
-        #Send True regardless of whether or not command was sent, because final goal was still achieved.
+        # Send True regardless of whether or not command was sent
         return True
 
     @property
     def is_on(self):
-        # True means on and False means off.
+        """Returns the assumed state of the TV."""
         return self.state
 
     def wake(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Wakes up the TV from sleep."""
         return self._send_keystroke(Control.wake)
 
     def sleep(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Puts the TV to sleep."""
         return self._send_keystroke(Control.sleep)
 
     def turn_off(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Turns off the TV completely."""
         return self._send_keystroke(Control.turn_off)
 
     def enter(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Presses enter to affirm."""
         return self._send_keystroke(Control.enter)
 
     def menu(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Opens the menu."""
         return self._send_keystroke(Control.menu)
 
     def home(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Goes home."""
         return self._send_keystroke(Control.home)
 
     def back(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Goes back."""
         return self._send_keystroke(Control.back)
 
     def up(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Presses up key."""
         return self._send_keystroke(Control.up)
 
     def down(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Presses down key."""
         return self._send_keystroke(Control.down)
 
     def left(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Presses left key."""
         return self._send_keystroke(Control.left)
 
     def right(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Presses right key."""
         return self._send_keystroke(Control.right)
 
     def volume_up(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Turns up the volume by one."""
         return self._send_keystroke(Control.volume_up)
 
     def volume_down(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Turns down the volume by one."""
         return self._send_keystroke(Control.volume_down)
 
     def mute(self):
-        # Uses the local _sendKeystroke function to avoid repetition. DRY code. Ironically, this comment is repeated.
+        """Mutes the TV."""
         return Control().mute(self.ip)
