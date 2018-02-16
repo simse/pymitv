@@ -11,6 +11,7 @@ This package was developed to interface with the Xiaomi TV 3 series through thei
 
 ##### Not sure if supported models
 - Mi TV 4A (all sizes)
+- Mi TV 4c (all sizes)
 
 ## Installing
 Easy as pie! Just use `pip`.
@@ -86,7 +87,7 @@ This is where the `Control` class comes in handy. The class has a bunch of prede
 - `volume_up`
 - `volume_down`
 
-#### `Control.sendKeystrokes(ip, keystrokes)`
+#### `Control.send_keystrokes(ip, keystrokes)`
 Sends a set of keystrokes to a TV at `ip`
 
 **Arguments**
