@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# JetBrains IDE
+.idea/
+
+# Pyinstaller
+build/
+dist/

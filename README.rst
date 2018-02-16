@@ -100,7 +100,7 @@ This method is used to scan the local network for TVs.
     discover = Discover.scan(speedy_gonzalez=True)
     print(discover)
 
-``Discover.checkIp()``
+``Discover.check_ip()``
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Used by ``Discover.scan()`` to check if a TV is present at the IP.
@@ -126,7 +126,7 @@ Used by ``Discover.scan()`` to check if a TV is present at the IP.
 
     import Discover from pymitv
 
-    print(Discover().checkIp('192.168.0.45'))
+    print(Discover().check_ip('192.168.0.45'))
 
 --------------
 

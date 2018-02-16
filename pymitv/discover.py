@@ -1,6 +1,5 @@
 import requests
 import socket
-#import multiprocessing
 
 class Discover:
     def __init(self):
@@ -27,7 +26,7 @@ class Discover:
         for ip_suffix in range(2, 256):
             ip_check = '{}.{}'.format(base_ip, ip_suffix)
 
-            if(self.checkIp(ip_check, speedy_gonzalez)):
+            if(self.check_ip(ip_check, speedy_gonzalez)):
                 tvs.append(ip_check)
 
                 if(stop_on_first):
@@ -35,7 +34,7 @@ class Discover:
 
         return tvs
 
-    def checkIp(self, ip, fast = False, log = False):
+    def check_ip(self, ip, fast = False, log = False):
         if(log):
             print('Checking ip: {}...'.format(ip))
 
@@ -47,7 +46,7 @@ class Discover:
 
         try:
             r = requests.get('http://{}:6095/request?action=isalive'.format(ip), timeout=request_timeout)
-        except:
+        except ConnectionError:
             return False
 
         return r.status_code == 200

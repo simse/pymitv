@@ -49,7 +49,7 @@ discover = Discover.scan(speedy_gonzalez=True)
 print(discover)
 ```
 
-#### `Discover.checkIp()`
+#### `Discover.check_ip()`
 Used by `Discover.scan()` to check if a TV is present at the IP.
 
 **Arguments**
@@ -64,7 +64,7 @@ Used by `Discover.scan()` to check if a TV is present at the IP.
 ```python
 import Discover from pymitv
 
-print(Discover().checkIp('192.168.0.45'))
+print(Discover().check_ip('192.168.0.45'))
 ```
 
 ___
