@@ -65,7 +65,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jekyll (~> 3.7.2)
+  jekyll
   jekyll-feed (~> 0.6)
   minima (~> 2.0)
   tzinfo-data

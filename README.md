@@ -39,14 +39,13 @@ This method is used to scan the local network for TVs.
 | --- | --- | --- | --- |
 | `stop_on_first` | No | `True` | Whether or not the method should continue scanning for TVs after finding its first one. Only needed for people with multiple Xiaomi TVs. |
 | `base_ip` | No | `0` | Instead of looking for the base IP, you can give it to the function in the format of `192.168.0.` |
-| `speedy_gonzalez` | No | `False` | Speeds up the scan drastically at the risk of missing a TV. |
 
 **Example usage**
 
 ```python
 import Discover from pymitv
 
-discover = Discover.scan(speedy_gonzalez=True)
+discover = Discover.scan()
 print(discover)
 ```
 
@@ -58,7 +57,6 @@ Used by `Discover.scan()` to check if a TV is present at the IP.
 | Name              | Required | Default value | Purpose                                                     |
 |-------------------|----------|---------------|-------------------------------------------------------------|
 | `ip`              | Yes      | None          | The IP to check.                                            |
-| `fast`            | No       | `False`       | Speeds up the scan drastically at the risk of missing a TV. |
 
 **Example usage**
 

@@ -10,7 +10,7 @@ class Discover:
     def __init(self):
         pass
 
-    def scan(self, stop_on_first=True, base_ip=0, speedy_gonzalez=False):
+    def scan(self, stop_on_first=True, base_ip=0):
         """Scans the local network for TVs."""
         tvs = []
 
@@ -30,7 +30,7 @@ class Discover:
         for ip_suffix in range(2, 256):
             ip_check = '{}.{}'.format(base_ip, ip_suffix)
 
-            if self.check_ip(ip_check, speedy_gonzalez):
+            if self.check_ip(ip_check):
                 tvs.append(ip_check)
 
                 if stop_on_first:
@@ -39,21 +39,18 @@ class Discover:
         return tvs
 
     @staticmethod
-    def check_ip(ip, fast=False, log=False):
+    def check_ip(ip, log=False):
         """Attempts a connection to the TV and checks if there really is a TV."""
         if log:
             print('Checking ip: {}...'.format(ip))
 
-        # Speeds up the check drastically, but compromises accuracy on slow networks
-        if fast:
-            request_timeout = 0.02
-        else:
-            request_timeout = 0.1
+        # The sweet-spot for the timeout
+        request_timeout = 0.02
 
         try:
             tv_url = 'http://{}:6095/request?action=isalive'.format(ip)
             request = requests.get(tv_url, timeout=request_timeout)
-        except ConnectionError:
+        except requests.exceptions.ConnectTimeout:
             return False
 
         return request.status_code == 200
