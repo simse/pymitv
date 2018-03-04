@@ -45,7 +45,7 @@ class Discover:
             print('Checking ip: {}...'.format(ip))
 
         # The sweet-spot for the timeout
-        request_timeout = 0.02
+        request_timeout = 0.03
 
         try:
             tv_url = 'http://{}:6095/request?action=isalive'.format(ip)

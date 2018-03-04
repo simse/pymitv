@@ -26,14 +26,14 @@ class Control:
         print()
 
     @staticmethod
-    def send_keystrokes(ip, keystrokes):
+    def send_keystrokes(ip, keystrokes, wait=False):
         """Connects to TV and sends keystroke via HTTP."""
         tv_url = 'http://{}:6095/controller?action=keyevent&keycode='.format(ip)
 
         for keystroke in keystrokes:
-            if keystroke == 'wait':
+            if keystroke == 'wait' or wait is True:
 
-                time.sleep(0.4)
+                time.sleep(0.5)
             else:
                 request = requests.get(tv_url + keystroke)
 

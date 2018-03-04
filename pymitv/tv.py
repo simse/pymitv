@@ -1,31 +1,37 @@
 """Contains the class for interfacing with the TV."""
 from pymitv import Control
+from pymitv import Navigator
 
 
 class TV:
     """A virtual representation of the TV that stores state, and takes controls."""
     ip = None
-    state = False
+    state = True
+    source = None
 
-    def __init__(self, ip=None):
+    def __init__(self, ip=None, initialized=False):
         # Check if an IP address has been supplied to the constructor
         if ip is None:
             print('No TV supplied, hence it won\'t work')
 
+        # Check if TV has been initialized for pymitv control
+        if initialized is False:
+            print('If the TV hasn\'t been setup for full pymitv control, \
+using any of the polyfill controls, could produce weird results.')
+
         # Make IP address global regardless of value
         self.ip = ip
 
-    def _send_keystroke(self, keystroke):
+    def _send_keystroke(self, keystroke, wait=False):
         # Check if an IP address has been supplied, if it hasn't return false.
         if self.ip is None:
             return False
 
         # Make sure the TV is not already on, and then send keystroke
-        if not self.state:
-            return Control().send_keystrokes(self.ip, keystroke)
+        return Control().send_keystrokes(self.ip, keystroke, wait)
 
         # Send True regardless of whether or not command was sent
-        return True
+        #return True
 
     @property
     def is_on(self):
@@ -87,3 +93,11 @@ class TV:
     def mute(self):
         """Mutes the TV."""
         return Control().mute(self.ip)
+
+    #def set_source(self, source):
+    #    """Selects and saves source."""
+    #    self.source = source
+    #    route = Navigator(source=self.source).navigate_to_source(source)
+    #    print(route)
+#
+    #    return self._send_keystroke(route, wait=True)
