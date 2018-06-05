@@ -33,7 +33,7 @@ class Control:
         for keystroke in keystrokes:
             if keystroke == 'wait' or wait is True:
 
-                time.sleep(0.5)
+                time.sleep(0.7)
             else:
                 request = requests.get(tv_url + keystroke)
 

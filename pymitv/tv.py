@@ -9,7 +9,7 @@ class TV:
     state = True
     source = None
 
-    def __init__(self, ip=None, initialized=False):
+    def __init__(self, ip=None, source=None, initialized=True):
         # Check if an IP address has been supplied to the constructor
         if ip is None:
             print('No TV supplied, hence it won\'t work')
@@ -21,6 +21,9 @@ using any of the polyfill controls, could produce weird results.')
 
         # Make IP address global regardless of value
         self.ip = ip
+
+        # Make active source global
+        self.source = source
 
     def _send_keystroke(self, keystroke, wait=False):
         # Check if an IP address has been supplied, if it hasn't return false.
@@ -94,10 +97,12 @@ using any of the polyfill controls, could produce weird results.')
         """Mutes the TV."""
         return Control().mute(self.ip)
 
-    #def set_source(self, source):
-    #    """Selects and saves source."""
-    #    self.source = source
-    #    route = Navigator(source=self.source).navigate_to_source(source)
-    #    print(route)
-#
-    #    return self._send_keystroke(route, wait=True)
+    def set_source(self, source):
+        """Selects and saves source."""
+        route = Navigator(source=self.source).navigate_to_source(source)
+
+        # Save new source
+        self.source = source
+        print(route)
+
+        return self._send_keystroke(route, wait=True)
