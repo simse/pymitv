@@ -1,0 +1,24 @@
+<div class="demo-container">
+    <div id="demo-{{ include.uid }}"></div>
+</div>
+
+<script>
+    const filename = "{{ include.filename }}";
+    const code = `{{ include.code }}`;
+    const language = "{{ include.language }}";
+
+    window.addEventListener("load", function(event) {
+        const demo = new GDemo('#demo-{{ include.uid }}');
+
+        const highlightedCode = Prism.highlight(
+            code,
+            Prism.languages[language],
+            language
+        );
+
+        demo
+            .openApp('editor', {minHeight: '350px', windowTitle: filename})
+            .write(highlightedCode)
+            .end();
+    });
+</script>

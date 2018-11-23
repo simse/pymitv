@@ -1,1 +1,4 @@
-theme: jekyll-theme-cayman
+plugins:
+- jekyll-remote-theme
+
+remote-theme: simse/unlit@v0.1.0

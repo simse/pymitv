@@ -1,0 +1,13 @@
+.demo-container {
+    max-width: 50%;
+    margin: 0 auto;
+    min-height: 400px;
+
+    @media(max-width: 1200px) {
+        max-width: 80%;
+    }
+
+    @media(max-width: 800px) {
+        max-width: 95%;
+    }
+}
