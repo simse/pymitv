@@ -3,7 +3,7 @@ pymitv
 
 A Python 3 based control of the Mi Tv 3(s)
 
-.. figure:: https://9to5google.files.wordpress.com/2016/03/xiaomi-mi-tv-3s.jpg?quality=82&w=1600&h=1000
+.. figure:: https://i.imgur.com/kOLWhWU.jpg
    :alt: The Mi TV 3s 65-inch
 
 The Mi TV 3s 65-inch
