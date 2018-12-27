@@ -103,6 +103,5 @@ using any of the polyfill controls, could produce weird results.')
 
         # Save new source
         self.source = source
-        print(route)
 
         return self._send_keystroke(route, wait=True)
