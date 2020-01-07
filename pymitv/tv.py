@@ -25,6 +25,9 @@ using any of the polyfill controls, could produce weird results.')
         # Make active source global
         self.source = source
 
+        # Set volume
+        self.volume = Control().get_volume(self.ip)
+
     def _send_keystroke(self, keystroke, wait=False):
         # Check if an IP address has been supplied, if it hasn't return false.
         if self.ip is None:
@@ -44,6 +47,16 @@ using any of the polyfill controls, could produce weird results.')
 
         self.source = source
         return Control().change_source(self.ip, source)
+
+    def get_volume(self):
+        """Get volume of xiaomi tv"""
+        # Check if an IP address has been supplied, if it hasn't return false.
+        if self.ip is None:
+            return False
+
+        self.volume = Control().get_volume(self.ip)
+
+        return self.volume
 
     @property
     def is_on(self):
