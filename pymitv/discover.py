@@ -49,7 +49,7 @@ class Discover:
         try:
             tv_url = 'http://{}:6095/request?action=isalive'.format(ip)
             request = requests.get(tv_url, timeout=request_timeout)
-        except requests.exceptions.ConnectTimeout:
+        except (requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError):
             return False
 
         return request.status_code == 200
