@@ -43,6 +43,17 @@ class Control:
         return True
 
     @staticmethod
+    def change_source(ip, source):
+        """Select source hdmi1 or hdmi2"""
+        tv_url = 'http://{}:6095/controller?action=changesource&source='.format(ip)
+        source = source
+        request = requests.get(tv_url + source)
+        if request.status_code != 200:
+            return False
+
+        return True
+
+    @staticmethod
     def mute(ip):
         """Polyfill for muting the TV."""
         tv_url = 'http://{}:6095/controller?action=keyevent&keycode='.format(ip)
