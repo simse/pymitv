@@ -9,7 +9,7 @@ class TV:
     state = True
     source = None
 
-    def __init__(self, ip=None, source=None, initialized=True):
+    def __init__(self, ip=None, source=None, initialized=True, assume_state=True):
         # Check if an IP address has been supplied to the constructor
         if ip is None:
             print('No TV supplied, hence it won\'t work')
@@ -24,6 +24,9 @@ using any of the polyfill controls, could produce weird results.')
 
         # Make active source global
         self.source = source
+
+        # Set assume_state
+        self.assume_state = assume_state
 
         # Set volume
         self.volume = Control().get_volume(self.ip)
@@ -60,8 +63,10 @@ using any of the polyfill controls, could produce weird results.')
 
     @property
     def is_on(self):
-        """Returns the assumed state of the TV."""
-        return self.state
+        """Returns the assume state of the TV."""
+        if self.assume_state:
+            return self.state
+        return Control().check_state(self.ip)
 
     def wake(self):
         """Wakes up the TV from sleep."""
