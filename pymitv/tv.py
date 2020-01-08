@@ -5,13 +5,13 @@ from pymitv import Navigator
 
 class TV:
     """A virtual representation of the TV that stores state, and takes controls."""
-    ip = None
+    ip_address = None
     state = True
     source = None
 
-    def __init__(self, ip=None, source=None, initialized=True, assume_state=True):
+    def __init__(self, ip_address=None, source=None, initialized=True, assume_state=True):
         # Check if an IP address has been supplied to the constructor
-        if ip is None:
+        if ip_address is None:
             print('No TV supplied, hence it won\'t work')
 
         # Check if TV has been initialized for pymitv control
@@ -20,7 +20,7 @@ class TV:
 using any of the polyfill controls, could produce weird results.')
 
         # Make IP address global regardless of value
-        self.ip = ip
+        self.ip_address = ip_address
 
         # Make active source global
         self.source = source
@@ -29,15 +29,15 @@ using any of the polyfill controls, could produce weird results.')
         self.assume_state = assume_state
 
         # Set volume
-        self.volume = Control().get_volume(self.ip)
+        self.volume = Control().get_volume(self.ip_address)
 
     def _send_keystroke(self, keystroke, wait=False):
         # Check if an IP address has been supplied, if it hasn't return false.
-        if self.ip is None:
+        if self.ip_address is None:
             return False
 
         # Make sure the TV is not already on, and then send keystroke
-        return Control().send_keystrokes(self.ip, keystroke, wait)
+        return Control().send_keystrokes(self.ip_address, keystroke, wait)
 
         # Send True regardless of whether or not command was sent
         #return True
@@ -45,19 +45,19 @@ using any of the polyfill controls, could produce weird results.')
     def change_source(self, source):
         """Change source of xiaomi tv"""
         # Check if an IP address has been supplied, if it hasn't return false.
-        if self.ip is None:
+        if self.ip_address is None:
             return False
 
         self.source = source
-        return Control().change_source(self.ip, source)
+        return Control().change_source(self.ip_address, source)
 
     def get_volume(self):
         """Get volume of xiaomi tv"""
         # Check if an IP address has been supplied, if it hasn't return false.
-        if self.ip is None:
+        if self.ip_address is None:
             return False
 
-        self.volume = Control().get_volume(self.ip)
+        self.volume = Control().get_volume(self.ip_address)
 
         return self.volume
 
@@ -66,7 +66,7 @@ using any of the polyfill controls, could produce weird results.')
         """Returns the assume state of the TV."""
         if self.assume_state:
             return self.state
-        return Control().check_state(self.ip)
+        return Control().check_state(self.ip_address)
 
     def wake(self):
         """Wakes up the TV from sleep."""
@@ -122,7 +122,7 @@ using any of the polyfill controls, could produce weird results.')
 
     def mute(self):
         """Mutes the TV."""
-        return Control().mute(self.ip)
+        return Control().mute(self.ip_address)
 
     def set_source(self, source):
         """Selects and saves source."""
