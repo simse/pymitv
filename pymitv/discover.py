@@ -19,11 +19,11 @@ class Discover:
             # Find IP address of computer pymitv is running on
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             sock.connect(("8.8.8.8", 80))
-            ip = sock.getsockname()[0]
+            ip_address = sock.getsockname()[0]
             sock.close()
 
             # Get IP and compose a base like 192.168.1.xxx
-            ip_parts = ip.split('.')
+            ip_parts = ip_address.split('.')
             base_ip = ip_parts[0] + '.' + ip_parts[1] + '.' + ip_parts[2]
 
         # Loop through every IP and check if TV is alive
@@ -39,17 +39,17 @@ class Discover:
         return tvs
 
     @staticmethod
-    def check_ip(ip, log=False):
+    def check_ip(ip_address, log=False):
         """Attempts a connection to the TV and checks if there really is a TV."""
         if log:
-            print('Checking ip: {}...'.format(ip))
+            print('Checking ip: {}...'.format(ip_address))
 
         request_timeout = 0.1
 
         try:
-            tv_url = 'http://{}:6095/request?action=isalive'.format(ip)
+            tv_url = 'http://{}:6095/request?action=isalive'.format(ip_address)
             request = requests.get(tv_url, timeout=request_timeout)
-        except requests.exceptions.ConnectTimeout:
+        except (requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError):
             return False
 
         return request.status_code == 200
